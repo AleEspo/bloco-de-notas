@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useState } from "react";
 import axios from "axios";
 
@@ -39,6 +41,7 @@ export function Home() {
   return (
     <>
       <h1>Bloco de Notas</h1>
+      <Link to="/notas/oi">Notas</Link>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="input-title">Titulo: </label>
