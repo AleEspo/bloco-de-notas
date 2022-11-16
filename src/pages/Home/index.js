@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { useState } from "react";
 import axios from "axios";
@@ -27,21 +28,24 @@ export function Home() {
       //PATCH
       //DELETE
 
-      const response = await axios.post(
-        "https://ironrest.cyclic.app/blocoDeNotas",
-        form
-      );
+      // Get das notas
+      // if ja tem banana
+      // edit na banana
+      // else > post normal
 
-      console.log(response.data);
+      await axios.post("https://ironrest.cyclic.app/blocoDeNotas", form);
+
+      toast.success("Nota criada com sucesso!");
     } catch (err) {
       console.log(err);
+      toast.error("Ops! Algo deu errado ...");
     }
   }
 
   return (
     <>
       <h1>Bloco de Notas</h1>
-      <Link to="/notas/oi">Notas</Link>
+      <Link to="/notas">Notas</Link>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="input-title">Titulo: </label>
