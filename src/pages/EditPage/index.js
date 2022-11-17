@@ -1,14 +1,36 @@
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { isUpdatedContext } from "../../context/isUpdated";
 
-export function Home() {
+export function EditPage() {
+  const params = useParams();
+  const navigate = useNavigate();
+
+  // const updatedContext = useContext(isUpdatedContext);
+
+  const { setUpdated } = useContext(isUpdatedContext);
+
   const [form, setForm] = useState({
     title: "",
     body: "",
   });
+
+  useEffect(() => {
+    async function fetchNote() {
+      try {
+        const response = await axios.get(
+          `https://ironrest.cyclic.app/blocoDeNotas/${params.id}`
+        );
+
+        setForm(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchNote();
+  }, []);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,20 +44,18 @@ export function Home() {
     e.preventDefault();
 
     try {
-      //GET
-      //POST
-      //PUT
-      //PATCH
-      //DELETE
+      const infosToSendForAPI = { ...form };
 
-      // Get das notas
-      // if ja tem banana
-      // edit na banana
-      // else > post normal
+      delete infosToSendForAPI._id;
 
-      await axios.post("https://ironrest.cyclic.app/blocoDeNotas", form);
+      await axios.put(
+        `https://ironrest.cyclic.app/blocoDeNotas/${params.id}`,
+        infosToSendForAPI
+      );
 
-      toast.success("Nota criada com sucesso!");
+      setUpdated(true);
+
+      navigate("/notas");
     } catch (err) {
       console.log(err);
       toast.error("Ops! Algo deu errado ...");
@@ -44,8 +64,7 @@ export function Home() {
 
   return (
     <>
-      <h1>Bloco de Notas</h1>
-      <Link to="/notas">Notas</Link>
+      <h1>Edição</h1>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="input-title">Titulo: </label>
@@ -55,8 +74,6 @@ export function Home() {
           name="title"
           onChange={handleChange}
           value={form.title}
-          required
-          pattern={/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm}
         />
 
         <label htmlFor="input-body">Nota: </label>
