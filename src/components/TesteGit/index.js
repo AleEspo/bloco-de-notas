@@ -1,5 +1,4 @@
 export function TesteGit() {
-
-  return <h1>CONFLITO</h1>;
+  return <h1>Oi</h1>;
 
 }
