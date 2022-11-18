@@ -1,3 +1,3 @@
 export function TesteGit() {
-  return <h1>Tchau</h1>;
+  return <h1>CONFLITO</h1>;
 }
