@@ -22,17 +22,6 @@ export function Home() {
     e.preventDefault();
 
     try {
-      //GET
-      //POST
-      //PUT
-      //PATCH
-      //DELETE
-
-      // Get das notas
-      // if ja tem banana
-      // edit na banana
-      // else > post normal
-
       await axios.post("https://ironrest.cyclic.app/blocoDeNotas", form);
 
       toast.success("Nota criada com sucesso!");
@@ -49,14 +38,16 @@ export function Home() {
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="input-title">Titulo: </label>
+
         <input
           id="input-title"
           type="text"
           name="title"
           onChange={handleChange}
           value={form.title}
+          placeholder="ex: Tirar o lixo"
           required
-          pattern={/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm}
+          // pattern={/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm}
         />
 
         <label htmlFor="input-body">Nota: </label>

@@ -6,6 +6,17 @@ import { isUpdatedContext } from "../../context/isUpdated";
 
 export function EditPage() {
   const params = useParams();
+
+  // const params = {
+  //   id: "",
+  //   params2: "",
+  //   params3:""
+  // }
+
+  // const {id} = useParams()
+
+  // id === params.id
+
   const navigate = useNavigate();
 
   // const updatedContext = useContext(isUpdatedContext);
@@ -81,6 +92,7 @@ export function EditPage() {
           id="input-body"
           type="text"
           name="body"
+          disabled
           onChange={handleChange}
           value={form.body}
         />
