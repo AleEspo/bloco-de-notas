@@ -28,6 +28,10 @@ export function Notes() {
   // }, []);
 
   useEffect(() => {
+    console.log("oi");
+  });
+
+  useEffect(() => {
     async function fetchNotes() {
       try {
         const response = await axios.get(
