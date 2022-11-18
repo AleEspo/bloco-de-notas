@@ -6,6 +6,7 @@ import { NotePage } from "./pages/NotePage";
 import { EditPage } from "./pages/EditPage";
 
 import { IsUpdatedContextComponent } from "./context/isUpdated";
+import { TesteGit } from "./components/TesteGit";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/notas" element={<Notes />} />
           <Route path="/nota/:id" element={<NotePage />} />
           <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/teste-git" element={<TesteGit />} />
         </Routes>
       </IsUpdatedContextComponent>
     </>
