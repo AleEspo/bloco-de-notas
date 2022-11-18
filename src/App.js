@@ -11,7 +11,6 @@ import { Teste2 } from "./pages/Teste2";
 
 import { TesteGit } from "./components/TesteGit";
 
-
 function App() {
   return (
     <>
@@ -22,13 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/notas" element={<Notes />} />
           <Route path="/nota/:id" element={<NotePage />} />
-
-         
-          <Route path="/teste" element={<Teste2 />} />
-
-          <Route path="/edite/:id" element={<EditPage />} />
-          <Route path="/teste-git" element={<TesteGit />} />
-
+          <Route path="/edit/:id" element={<EditPage />} />
         </Routes>
       </IsUpdatedContextComponent>
     </>
