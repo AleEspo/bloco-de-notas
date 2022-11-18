@@ -6,6 +6,7 @@ import { NotePage } from "./pages/NotePage";
 import { EditPage } from "./pages/EditPage";
 
 import { IsUpdatedContextComponent } from "./context/isUpdated";
+import { Teste2 } from "./pages/Teste2";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/notas" element={<Notes />} />
           <Route path="/nota/:id" element={<NotePage />} />
           <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/teste" element={<Teste2 />} />
         </Routes>
       </IsUpdatedContextComponent>
     </>
