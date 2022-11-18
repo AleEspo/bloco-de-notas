@@ -8,6 +8,7 @@ import { isUpdatedContext } from "../../context/isUpdated";
 
 export function Notes() {
   const [notes, setNotes] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const updatedContext = useContext(isUpdatedContext);
 
@@ -19,13 +20,42 @@ export function Notes() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   console.log("Estou sendo montado/atualizado");
+  async function deleteNotes(noteId, toastId) {
+    try {
+      await axios.delete(`https://ironrest.cyclic.app/blocoDeNotas/${noteId}`);
+      toast.dismiss(toastId);
+      toast.success("Nota deletada com sucesso!");
+      setIsDeleted(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  //   return () => {
-  //     console.log("Estou sendo desmontado");
-  //   };
-  // }, []);
+  async function handleDelete(id) {
+    toast((t) => {
+      return (
+        <>
+          <span>Tem certeza que você deseja realizar essa ação?</span>
+          <button
+            className="btn btn-danger m-2"
+            onClick={() => {
+              deleteNotes(id, t.id);
+            }}
+          >
+            Sim
+          </button>
+          <button
+            className="btn btn-secondary m-2"
+            onClick={() => {
+              toast.dismiss(t.id);
+            }}
+          >
+            Não
+          </button>
+        </>
+      );
+    });
+  }
 
   useEffect(() => {
     async function fetchNotes() {
@@ -33,9 +63,6 @@ export function Notes() {
         const response = await axios.get(
           "https://ironrest.cyclic.app/blocoDeNotas"
         );
-
-        // Remover duplicatas
-
         setNotes(response.data);
       } catch (err) {
         console.log(err);
@@ -43,7 +70,11 @@ export function Notes() {
     }
 
     fetchNotes();
-  }, []);
+  }, [isDeleted]);
+
+  useEffect(() => {
+    setIsDeleted(false);
+  }, [notes]);
 
   return (
     <>
@@ -68,6 +99,14 @@ export function Notes() {
               <Link to={`/edit/${currentNote._id}`} className="m-3">
                 <Card.Link>Editar</Card.Link>
               </Link>
+
+              <button
+                onClick={() => {
+                  handleDelete(currentNote._id);
+                }}
+              >
+                Deletar nota
+              </button>
             </Card.Body>
           </Card>
         );
