@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/notas" element={<Notes />} />
           <Route path="/nota/:id" element={<NotePage />} />
-          <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/edite/:id" element={<EditPage />} />
           <Route path="/teste-git" element={<TesteGit />} />
         </Routes>
       </IsUpdatedContextComponent>
